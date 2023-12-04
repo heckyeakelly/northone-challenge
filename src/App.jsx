@@ -54,20 +54,17 @@ function App() {
   };
 
   return (
-    <main className="container">
-      <h1>To-Do List</h1>
-      <section className='input-form'>
+    <main>
+      <header><h1>To-Do List</h1></header>
+      <div className="body">
+      <section className='form'>
+        <div className="form--top">
         <label>Title:</label>
         <input
           type="text"
           value={taskInput.title}
           onChange={(e) => setTaskInput({ ...taskInput, title: e.target.value })}
         />
-        <label>Description:</label>
-        <textarea
-          value={taskInput.description}
-          onChange={(e) => setTaskInput({ ...taskInput, description: e.target.value })}
-        ></textarea>
         <label>Status:</label>
         <select
           value={taskInput.status}
@@ -83,8 +80,16 @@ function App() {
           value={taskInput.dueDate}
           onChange={(e) => setTaskInput({ ...taskInput, dueDate: e.target.value })}
         />
-        <button onClick={addTask}>{editingTaskIndex !== null ? 'Edit Task' : 'Add Task'}</button>
+        </div>
+        <label>Description:</label>
+        <input
+          value={taskInput.description}
+          onChange={(e) => setTaskInput({ ...taskInput, description: e.target.value })}
+        ></input>
+        
+        <button className='btn--add-edit' onClick={addTask}>{editingTaskIndex !== null ? 'Edit Task' : 'Add Task'}</button>
       </section>
+      <section className="tasks">
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>
@@ -95,17 +100,19 @@ function App() {
               <p>Due Date: {task.dueDate}</p>
             </div>
             <div className='task-buttons'>
-              <button className="edit-btn" onClick={() => editTask(index)}>
+              <button className="btn--edit" onClick={() => editTask(index)}>
                 Edit
               </button>
-              <button className="delete-btn" onClick={() => deleteTask(index)}>
+              <button className="btn--delete" onClick={() => deleteTask(index)}>
                 Delete
               </button>
             </div>
           </li>
         ))}
       </ul>
-      <footer>Kelly Kou NorthOne Full Stack Developer Intern January 2024 Challenge</footer>
+      </section>
+      </div>
+      <footer><p>Kelly Kou</p> NorthOne Full Stack Developer Intern January 2024 Challenge</footer>
     </main>
   );
 }
